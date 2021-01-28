@@ -1,0 +1,132 @@
+{% load static wagtailuserbar menus_tags %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% get_menu "main" as navigation %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            {% block title %}
+                {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+            {% endblock %}
+            {% block title_suffix %}
+                {% with self.get_site.site_name as site_name %}
+                    {% if site_name %}- {{ site_name }}{% endif %}
+                {% endwith %}
+            {% endblock %}
+        </title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        {# Global stylesheets #}
+        <script src="https://kit.fontawesome.com/a970fce67c.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/SLEVOV_WAGTAIL.css' %}">
+
+        {% block extra_css %}
+            {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+    </head>
+
+
+
+    <body class="{% block body_class %}{% endblock %}">
+
+
+        {% wagtailuserbar %}
+        <div class="container">
+            <nav class="navbar navbar-light bg-light">
+                {% for item in navigation.menu_polozky.all %}
+                    {% if item.image %}
+                        {% image item.image fill-75x75 as img %}
+                        <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a href="{{ item.link }}" class="nav-link"{% if item.open_in_new_tab %} target="blank"{% endif %}>
+                                    <img src="{{ img.url }}" style="margin-right: 20px">
+                                    <span class="navbar-brand mb-0 h1" style="font-size: 30px">{{ item.title }}</span></a>
+                            </li>
+                        </ul>
+                    {% endif %}
+                {% endfor %}
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Co hledáte?" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Hledat</button>
+                </form>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        {% if request.user.is_authenticated %}
+                            Hi {{ request.user.username }}
+                            <a href="{% url 'account_logout' %}" class="nav-link">Logout</a>
+
+                        {% else %}
+                            hi guest
+                            <a href="{% url 'account_login' %}" class="nav-link">Login</a>
+
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+
+
+        {% block content %}{% endblock %}
+
+
+        <div class="container">
+            <footer style="background-color: lightgreen">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <p class="h4">Sociální sítě:</p>
+                    </div>
+                    {% if settings.socialni_site.NastaveniSocialnichMedii.facebook %}
+                        <a href="{{ settings.socialni_site.NastaveniSocialnichMedii.facebook }}">
+                            <i class="fab fa-facebook fa-lg" style="margin-left: 20px;"></i>
+                        </a>
+                    {% endif %}
+
+                    {% if settings.socialni_site.NastaveniSocialnichMedii.twitter %}
+                        <a href="{{ settings.socialni_site.NastaveniSocialnichMedii.twitter }}">
+                            <i class="fab fa-twitter fa-lg" style="margin-left: 20px;"></i>
+                        </a>
+                    {% endif %}
+
+                    {% if settings.socialni_site.NastaveniSocialnichMedii.youtube %}
+                        <a href="{{ settings.socialni_site.NastaveniSocialnichMedii.youtube }}">
+                            <i class="fab fa-youtube fa-lg" style="margin-left: 20px;"></i>
+                        </a>
+                    {% endif %}
+
+                    {% if settings.socialni_site.NastaveniSocialnichMedii.instagram %}
+                        <a href="{{ settings.socialni_site.NastaveniSocialnichMedii.instagram }}">
+                            <i class="fab fa-instagram fa-lg" style="margin-left: 20px;"></i>
+                        </a>
+                    {% endif %}
+
+                    {% if settings.socialni_site.NastaveniSocialnichMedii.linkedin %}
+                        <a href="{{ settings.socialni_site.NastaveniSocialnichMedii.linkedin }}">
+                            <i class="fab fa-linkedin fa-lg" style="margin-left: 20px;"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            </footer>  
+        </div>
+          
+
+
+        {# Global javascript #}
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/SLEVOV_WAGTAIL.js' %}"></script>
+
+        {% block extra_js %}
+            {# Override this in templates to add extra javascript #}
+        {% endblock %}
+
+
+    </body>
+</html>
