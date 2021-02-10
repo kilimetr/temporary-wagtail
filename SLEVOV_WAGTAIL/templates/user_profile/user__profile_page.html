@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load static wagtailcore_tags wagtailuserbar %}
+
+{% block content %}
+
+	{% if request.user.is_authenticated %}
+		<h1>{{ self.titlee }}</h1>
+
+		<h3>{{ self.description|richtext }}{{ request.user.username }}</h3>
+
+	{% endif %}
+
+
+{% endblock %}
