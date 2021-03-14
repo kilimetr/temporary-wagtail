@@ -35,20 +35,19 @@ class Command(BaseCommand):
 					# print(i)
 					# print()
 
-		name  = "polozka_ccm"
-		price = 1221
-		shop  = "obchod_ccm"
+		picture = "https://img.kupi.cz/kupi/thumbs/mandarinky-5_170_340.jpg"
+		name  = "polozka_ccm_02"
+		price = 1221.02
+		shop  = "obchod_ccm_02"
 
 		nadrazena_stranka = Page.objects.get(id = 73)
 		print(nadrazena_stranka)
 
-		polozka_nova = PolozkaPage.objects.create(name = name, price = price, shop = shop)
-		nadrazena_stranka.add_child(polozka_nova)
+		polozka_nova = PolozkaPage(title = "polozka_page_ccm_02", name = name, price = price, shop = shop, picture = picture)
+		nadrazena_stranka.add_child(instance = polozka_nova)
 		
 		polozka_nova.save()
 
 		print("ZAVŘENO")
 
-# chyba
-# django.core.exceptions.ValidationError: {'path': ['This field cannot be blank.'], 'depth': ['This field cannot be null.'], 
-# 'title': ['This field cannot be blank.'], 'slug': ['This field cannot be blank.'], 'picture': ['This field cannot be blank.']}
+
