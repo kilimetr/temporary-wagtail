@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+  <div class="section">
+    <div class="row">
+      <div class="col m12">
+        <h1>{% trans 'We have received your order. It will be processed in very short time.' %}</h1>
+        <a href="/" class="btn">{% trans 'Back to shop' %}</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

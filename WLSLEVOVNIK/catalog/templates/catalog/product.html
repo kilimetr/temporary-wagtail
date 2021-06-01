@@ -1,0 +1,66 @@
+<!-- {% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags longclawcore_tags basket_tags i18n %}
+{% block body_class %} template-productpage{%endblock%}
+{% block content %}
+<div class="container">
+  <div class="section">
+    <div class="row">
+      <div class="col m12">
+        <a href="{{ page.get_parent.url }}">Return</a>
+        <h1 class="product_title">{{ page.title }}</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col m6">
+        {% if page.images %}
+        <div class="slider">
+          <ul class="slides">
+            {% for item in page.images.all %}
+            <li>
+              {% image item.image fill-320x240 class="materialboxed" %}
+              <div class="caption center-bottom">
+                <p>{{ item.caption }}</p>
+              </div>
+            </li>
+            {% endfor %}
+            {% else %}
+            <img style="width: 450px; background-color: #eceff1" src="..." />
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      <div class="col m6">
+
+        <div class="product_content_info">
+
+          <div class="product_description">{{ page.description|richtext }}</div>
+        </div>
+
+        {% if page.tags.all.count %}
+        <div class="tags">
+          <h3>Tags</h3>
+          {% for tag in page.tags.all %}
+          <a href="{% slugurl 'tags' %}?tag={{ tag }}"><button type="button">{{ tag }}</button></a>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <div class="input-field col m12">
+          <select id="variant-select">
+            {% for variant in page.variants.all %}
+            <option value="{{variant.id}}">{{variant.ref}}</option>
+            {% endfor %}
+          </select>
+          <label>{% trans 'Variants' %}</label>
+        </div>
+        <button id="add-to-basket-btn" class="btn">Add To Basket</button>
+        {% comment %} {% add_to_basket_btn id="add-to-basket-btn" variant.id
+      btn_text="Add To Basket" btn_class="btn btn-default" %} {% endcomment %}
+      </div>
+      <div class="col m12">
+        {{ page.additional_info|richtext }}
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}
+ -->
