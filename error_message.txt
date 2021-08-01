@@ -1,0 +1,4 @@
+error after makemigrations:
+
+ValueError: The field basket.BasketItem.variant was declared with a lazy reference to 'polozka.polozkavariantlongclaw', but app 'polozka' doesn't provide model 'polozkavariantlongclaw'.
+The field orders.OrderItem.product was declared with a lazy reference to 'polozka.polozkavariantlongclaw', but app 'polozka' doesn't provide model 'polozkavariantlongclaw'.
