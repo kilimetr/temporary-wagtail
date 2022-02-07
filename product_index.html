@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags longclawcore_tags basket_tags i18n djmoney %}
+
+
+
+{% block content %}
+
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <div class="col l12">
+    <div class="container">
+        <div class="section">
+            <!-- {% if page.specific.subindexes %}
+                <div class="row">
+                    <h1>{% trans 'Subcategories' %}</h1>
+                </div>
+                <div class="row">
+                    <div class="col s12 m3">
+                        {% for post in page.specific.subindexes %}
+                            {% with post=post.specific %}
+                                <a class="card" href="{{ post.url }}">
+                                    <div class="card-image">
+                                        {% image post.image max-400x320 %}
+                                        <div class="card-title">{{ post.title }}
+                                        </div>
+                                    </div>
+                                </a>
+
+                            {% endwith %}
+
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+            {% endif %} -->
+
+<!-- money_localize item.variant.price -->
+AAA
+
+{% for item in page.products %}
+    
+    xx
+    {{ item.variants.main_price }}
+    {{ item.specific.variants.main_price }}
+    xx
+    {{ item.name }} <!-- zobrazí -->
+    yy
+    {{ self.name }}
+    {{ product.specific.variants.shop }}
+
+    {% for prvek in item.varaints %}
+        { prvek.shop }
+        { prvek.main_price }
+        { prvek.price }
+        { prvek.price_money }
+    {% endfor %}
+{% endfor%}
+
+
+{% for item in page.products %}
+
+    <li class="list-group-item">Cena: {{ item.variants.main_price }}</li>
+    <li class="list-group-item">Cena: {{ item.price_money }}</li>
+    <li class="list-group-item">Obchod: {{ item.variants.shop }}</li>
+    <li class="list-group-item">Na skladě: {{ item.stock }}</li>
+    <li class="list-group-item">Název: {{ item.name }}</li>
+    <li class="list-group-item">Title: {{ item.title }}</li>
+
+    <div class="card" href="{{ item.url }}"> 
+        <a href="{{ item.url }}">item.url</a>
+    <select id = "variant-select">
+        <option value="{{ item.id }}"></option>
+    </select>
+    <input type="number" class="form-control" value="1" aria-describedby="button-addon2" id="item-quantity-to-basket" min="1">
+    <div class="input-group-append">
+        <button class="btn btn-outline-primary" id="add-to-basket-btn">Přidat do košíku</button>
+    </div>
+
+{% endfor %}
+
+AAA
+            <div class="row">
+                <h1>{{ page.title }}</h1>
+            </div>
+            <div class="row">
+                {% for item in page.specific.products %}
+
+                        <div class="col s12 m3">
+                            <div class="card">
+                                <a href="{{ item.url }}">
+                                    <div class="card-image">
+                                        {% image item.images.first.image max-400x320 %}
+                                        <span class="card-title">{{ item.title }}</span>
+                                    </div>
+                                    <div class="card-content">
+                                        <p>{{ item.description|richtext }}</p>
+                                        !!! CENA A DĚDĚNÍ !!!
+                                    </div>
+                                </a>
+                                <select id = "variant-select">
+        <option value="{{ item.id }}"></option>
+    </select>
+
+    <input type="number" class="form-control" value="1" aria-describedby="button-addon2" id="item-quantity-to-basket" min="1">
+    <div class="input-group-append">
+        <button class="btn btn-outline-primary" id="add-to-basket-btn">Přidat do košíku</button>
+    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    
+
+                {% endfor %}
+
+                {% for product in products %}
+                    {{ product.name }}
+                    {{ product.shop }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
