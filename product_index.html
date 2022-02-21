@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags longclawcore_tags basket_tags i18n djmoney %}
+
+
+
+{% block content %}
+
+    <div class="container">
+        <div class="section">
+            <h3>{{ page.title }}</h3>
+            <div class="row">
+                {% for item in page.products %}
+                <div class="card" style="width: 11rem;">
+                    <img src="{{ item.picture }}" class="card-img-top">
+                    <div class="card-body">
+                        <a href="{{ item.url }}">
+                            <h5 class="card-title">{{ item.name }}</h5>
+                        </a>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        {% for prvek in item.variants.all %}
+                            <li class="list-group-item">Cena: {{ prvek.main_price }}</li>
+                            <li class="list-group-item">Obchod: {{ prvek.shop }}</li>
+                            <select id = "variant-select">
+                            <option id = "variant-option" value="{{ prvek.id }}"></option>
+                            </select>{{ prvek.id }} as {{ prvek.ref }}
+                    </ul>
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" value="1" aria-describedby="button-addon2" id="item-quantity-to-basket" min="1">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary" id="add-to-basket-btn" data-variant-id="{{ prvek.id }}">Přidat do košíku</button>
+                                <button class="btn btn-outline-primary" id="btn-add-to-basket" data-variant-id="{{ prvek.id }}">Přidat do košíku</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}bbb
+                {% endfor %}ccc
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        document.querySelectorAll("[id=variant-select]").forEach(function(el) {
+            el.style.display = "none";
+        })
+
+        document.querySelectorAll("[id=option-select]").forEach(function(el) {
+            el.style.display = "none";
+        })
+    </script>
+
+
+{% endblock %}
+
+
